@@ -42,9 +42,10 @@ is loading.
 
 ## Install
 
-1. Download `save-anywhere-<version>.zip` from the [Releases](../../../../releases) page.
-2. Extract it into the `mods/hmbtn/` folder next to the game executable (create it if
-   missing). You end up with `mods/hmbtn/save-anywhere/mod.toml`.
+1. Open [`mod.toml`](mod.toml) in this folder and click **Download raw file**.
+2. Put it in a folder named `save-anywhere` inside `mods/hmbtn/` next to the game executable
+   (create the folders if missing). You end up with `mods/hmbtn/save-anywhere/mod.toml`. No zip
+   or release needed: the mod is that one file.
 3. Restart the game. Mods are read when the game starts.
 
 To remove it, delete the `save-anywhere` folder and restart. Requires the game build with

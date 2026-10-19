@@ -42,9 +42,10 @@ Eles **não** são protegidos na tela "Now Loading", então não aperte enquanto
 
 ## Instalação
 
-1. Baixe `save-anywhere-<versão>.zip` na página de [Releases](../../../../releases).
-2. Extraia dentro da pasta `mods/hmbtn/`, ao lado do executável do jogo (crie a pasta se não
-   existir). Você deve ficar com `mods/hmbtn/save-anywhere/mod.toml`.
+1. Abra o [`mod.toml`](mod.toml) desta pasta e clique em **Download raw file**.
+2. Coloque-o numa pasta chamada `save-anywhere` dentro de `mods/hmbtn/`, ao lado do executável do
+   jogo (crie as pastas se não existirem). Você deve ficar com `mods/hmbtn/save-anywhere/mod.toml`.
+   Não precisa de zip nem de release: o mod é esse arquivo.
 3. Reinicie o jogo. Os mods são lidos quando o jogo inicia.
 
 Para remover, apague a pasta `save-anywhere` e reinicie. Precisa da versão do jogo com o motor

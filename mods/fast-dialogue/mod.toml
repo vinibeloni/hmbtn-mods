@@ -1,0 +1,49 @@
+name = "Quality life: faster dialogue"
+version = "0.1.1"
+description = "Faster dialogue text: roughly three times as many characters per second, always on."
+
+# CHANGE THE SPEED YOURSELF: edit the last digit of the second `replace` line below (the one with
+# 0x2442000_). 0x24420002 = about 3x (default), 0x24420003 = 4.5x, 0x24420004 = 6x, and so on up to
+# 0x2442000F. Save the file and restart the game. Higher is faster, but boxes that close on their own (no
+# Cross prompt, e.g. the village tour) are timed by the scene, so at high values they can vanish before
+# they can be read. 4 was fine in the policeman event; 2 is the value tested in the whole opening.
+#
+# What it does: text boxes print about three times faster. Every character still
+# prints, in order, and Cross still advances a finished box exactly as before.
+#
+# How the two words were found (USA disc SLUS-01115, main EXE, always resident):
+#   - Writing a box's text sits in a 16-bit string: 'A' = 0x00, 'a' = 0x20, space
+#     0x0FFD, newline 0xFFFE, end 0xFFFF (found by a relative-letter search of RAM
+#     for words shown on the map screen).
+#   - The function at 0x80018B98 lays out and draws a message. Its base register is
+#     gp = 0x8005E274. gp+464 (0x8005E444, halfword) is the count of characters
+#     revealed so far; gp+466 is the box state; gp+472 (0x8005E44C) is the
+#     period between characters, 3 in the stock game. A write trace on 0x8005E444
+#     during the policeman event named 0x80018Cxx as the only code touching it.
+#   - Each call, 0x80012CB4(period, &gp+468, 1) compares the vsync counter with the
+#     last tick and answers 1 once the period has passed. Only then does the code at
+#     0x80018C54..0x80018C58 add 1 to the revealed count.
+#   Stock speed, measured while the policeman event printed: 0.64 characters per game
+#   tick (about 19 per second, counting spaces and codes).
+#
+# The patches:
+#   0x80018C10  lh a0,472($gp)     -> addiu a0,zero,0   no wait between characters
+#   0x80018C58  addiu v0,v0,1      -> addiu v0,v0,2     two characters per step
+# The drawing loop at 0x80018FDC draws every character from the last drawn index up to
+# the revealed count, one at a time, so a step of 2 skips nothing.
+#
+# Does not touch: the dialogue box that waits for Cross, name entry, menus, or
+# anything that is not drawn by 0x80018B98.
+# Remove the folder and restart: text is back to stock speed.
+
+[[patch]]
+address  = 0x80018C10
+expected = 0x878401D8
+replace  = 0x24040000
+note     = "period between characters: lh a0,472($gp) -> addiu a0,zero,0"
+
+[[patch]]
+address  = 0x80018C58
+expected = 0x24420001
+replace  = 0x24420002
+note     = "revealed characters per step: addiu v0,v0,1 -> addiu v0,v0,2"

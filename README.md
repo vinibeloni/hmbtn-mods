@@ -13,6 +13,8 @@ and it is active; remove it and it is gone. No rebuild, no regeneration, no in-g
 | Mod | What it does | Docs |
 |---|---|---|
 | **save-anywhere** | Open the diary save screen (**L2 + R2**) or load screen (**L1 + R1**) from the field, without going to bed. | [English](mods/save-anywhere/README.md) · [Português](mods/save-anywhere/README.pt-BR.md) |
+| **fast-dialogue** | Text boxes print about three times faster, always on. The speed is one number you can edit in `mod.toml`. | [English](mods/fast-dialogue/README.md) · [Português](mods/fast-dialogue/README.pt-BR.md) |
+
 
 Each mod has its own README with controls, what to expect, how it works and its changelog.
 Each `mod.toml` also starts with a comment block explaining what the mod does and what it
@@ -23,16 +25,17 @@ does not guard against. Read both before using a mod.
 You need the game built from the repository above, with the mod engine (branch
 `feat/drop-in-mods`, commit `5eb3c45` or later).
 
-1. Download the zip of the mod you want from the **Releases** page
-   (`<mod>-<version>.zip`).
-2. Extract it into the `mods/hmbtn/` folder next to the game executable (create the folder
-   if it is not there). You end up with `mods/hmbtn/<mod>/mod.toml`.
+1. Open the mod's folder here (`mods/<mod>/`), open its `mod.toml` and click **Download raw
+   file**. (Or use **Code → Download ZIP** for the whole repository and take the folder.)
+2. Put the `mod.toml` in a folder named after the mod, inside `mods/hmbtn/` next to the game
+   executable (create the folders if they are not there). You end up with
+   `mods/hmbtn/<mod>/mod.toml`. A mod is just that one file: no zip and no release needed.
 3. Restart the game. Mods are read when the game starts.
 
 To remove a mod, delete its folder. Extracting into a folder named after the mod
 (`mods/hmbtn/<mod>/<mod>/mod.toml`) also works.
 
-Instead of the zips, from a clone of this repository:
+Or, from a clone of this repository, the installer does the copy for you:
 
 ```powershell
 .\install.ps1 -GameDir "C:\path\to\folder\with\the\exe" [-Mod save-anywhere]
@@ -54,7 +57,9 @@ the engine has no way to know. Every `[[patch]]` carries the stock word it expec
 (`expected`) and is skipped when RAM holds anything else; `[[trigger]]` writes are not
 guarded that way.
 
-## Making a release
+## Making a release (optional)
+
+Not needed to use a mod: the folder is the mod. A release zip is only a convenience.
 
 ```sh
 python3 tools/package.py                 # builds dist/<mod>-<version>.zip, one per mod

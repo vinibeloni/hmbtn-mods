@@ -14,6 +14,7 @@ liga/desliga dentro do jogo.
 | Mod | O que faz | Documentação |
 |---|---|---|
 | **save-anywhere** | Abre a tela de salvar (**L2 + R2**) ou de carregar (**L1 + R1**) o diário direto do campo, sem precisar ir dormir. | [English](mods/save-anywhere/README.md) · [Português](mods/save-anywhere/README.pt-BR.md) |
+| **fast-dialogue** | Os textos aparecem cerca de três vezes mais rápido, sempre ligado. A velocidade é um número que você edita no `mod.toml`. | [English](mods/fast-dialogue/README.md) · [Português](mods/fast-dialogue/README.pt-BR.md) |
 
 Cada mod tem o seu próprio README com controles, o que esperar, como funciona e o histórico
 de versões. O `mod.toml` de cada um também começa com um bloco de comentários (em inglês)
@@ -24,15 +25,17 @@ explicando o que o mod faz e contra o que ele não protege. Leia os dois antes d
 Você precisa do jogo compilado a partir do repositório acima, com o motor de mods (branch
 `feat/drop-in-mods`, commit `5eb3c45` ou posterior).
 
-1. Baixe o zip do mod que quiser na página de **Releases** (`<mod>-<versão>.zip`).
-2. Extraia dentro da pasta `mods/hmbtn/`, ao lado do executável do jogo (crie a pasta se ela
-   não existir). Você deve ficar com `mods/hmbtn/<mod>/mod.toml`.
+1. Abra a pasta do mod aqui (`mods/<mod>/`), abra o `mod.toml` e clique em **Download raw
+   file**. (Ou use **Code → Download ZIP** para baixar o repositório inteiro e pegar a pasta.)
+2. Coloque o `mod.toml` numa pasta com o nome do mod, dentro de `mods/hmbtn/`, ao lado do
+   executável do jogo (crie as pastas se não existirem). Você deve ficar com
+   `mods/hmbtn/<mod>/mod.toml`. Um mod é só esse arquivo: sem zip e sem release.
 3. Reinicie o jogo. Os mods são lidos quando o jogo inicia.
 
 Para remover um mod, apague a pasta dele. Extrair numa pasta com o nome do mod
 (`mods/hmbtn/<mod>/<mod>/mod.toml`) também funciona.
 
-Em vez dos zips, a partir de um clone deste repositório:
+Ou, a partir de um clone deste repositório, o instalador faz a cópia por você:
 
 ```powershell
 .\install.ps1 -GameDir "C:\caminho\da\pasta\com\o\exe" [-Mod save-anywhere]
@@ -54,7 +57,9 @@ SLUS-01115**. Em outra versão ou região escreveriam no lugar errado, e o motor
 saber. Todo `[[patch]]` traz a palavra original que espera (`expected`) e é ignorado se a RAM
 tiver outra coisa; as escritas de `[[trigger]]` não têm essa proteção.
 
-## Publicar uma release
+## Publicar uma release (opcional)
+
+Não é preciso para usar um mod: a pasta é o mod. O zip da release é só uma comodidade.
 
 ```sh
 python3 tools/package.py                 # gera dist/<mod>-<versão>.zip, um por mod
