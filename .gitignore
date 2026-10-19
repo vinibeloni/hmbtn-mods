@@ -1,0 +1,15 @@
+# Game data must never be committed here. See README.
+*.bin
+*.cue
+*.iso
+*.img
+*.chd
+*.mcd
+*.mcr
+*.pst
+*.sav
+*.exe
+SLUS_*
+psx_freeze_*.json
+__pycache__/
+dist/

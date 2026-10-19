@@ -1,0 +1,5 @@
+# Shell scripts and the git hook must keep LF line endings on every platform.
+*.sh text eol=lf
+.githooks/* text eol=lf
+*.toml text eol=lf
+LICENSE text eol=lf
